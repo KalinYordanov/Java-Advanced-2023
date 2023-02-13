@@ -41,7 +41,7 @@ public class k02TreasureHunt {
             switch (command) {
                 case "up":
                     currentRow--;
-                    if (isOutside(currentRow, currentCol, matrix) ||isThereX(currentRow, currentCol, matrix)) {
+                    if (isOutside(currentRow, currentCol, matrix) ||isThereТ(currentRow, currentCol, matrix)) {
                         currentRow++;
                     }else{
                         path.add(command);
@@ -49,7 +49,7 @@ public class k02TreasureHunt {
                     break;
                 case "down":
                     currentRow++;
-                    if (isOutside(currentRow, currentCol, matrix)|| isThereX(currentRow, currentCol, matrix)) {
+                    if (isOutside(currentRow, currentCol, matrix)|| isThereТ(currentRow, currentCol, matrix)) {
                         currentRow--;
                     } else{
                         path.add(command);
@@ -57,7 +57,7 @@ public class k02TreasureHunt {
                     break;
                 case "left":
                     currentCol--;
-                    if (isOutside(currentRow, currentCol, matrix) || isThereX(currentRow, currentCol, matrix)) {
+                    if (isOutside(currentRow, currentCol, matrix) || isThereТ(currentRow, currentCol, matrix)) {
                         currentCol++;
                     } else {
                         path.add(command);
@@ -65,7 +65,7 @@ public class k02TreasureHunt {
                     break;
                 case "right":
                     currentCol++;
-                    if (isOutside(currentRow, currentCol, matrix) || isThereX(currentRow, currentCol, matrix)) {
+                    if (isOutside(currentRow, currentCol, matrix) || isThereТ(currentRow, currentCol, matrix)) {
                         currentCol--;
                     } else {
                         path.add(command);
@@ -101,7 +101,7 @@ public class k02TreasureHunt {
         }
     }
 
-    public static boolean isThereX(int row, int col, String[][] matrix) {
+    public static boolean isThereТ(int row, int col, String[][] matrix) {
         if (matrix[row][col].equals("T")) {
             return true;
         }
