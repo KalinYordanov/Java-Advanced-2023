@@ -1,32 +1,61 @@
-package DefiningClassesExercises.SpeedRacing;
+package SpeedRacing;
 
 public class Car {
-    private String name;
+    private String model;
     private double fuelAmount;
-    private double coastFuelPer1Km;
-    private int distance;
+    private double fuelCost;
+    private double distancedTravelled;
 
-    public Car(String name, double fuelAmount, double coastFuelPer1Km) {
-        this.name = name;
+    public Car(String model, double fuelAmount, double fuelCost) {
+        this.model = model;
         this.fuelAmount = fuelAmount;
-        this.coastFuelPer1Km = coastFuelPer1Km;
-        this.distance = 0;
-
+        this.fuelCost = fuelCost;
+        this.distancedTravelled = 0;
     }
 
-    public boolean drive(int kmDrive) {
-        double needFuel = kmDrive * this.coastFuelPer1Km;
-        if (needFuel <= this.fuelAmount) {
-            this.fuelAmount -= needFuel;
-            this.distance += kmDrive;
-            return true;
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public double getFuelAmount() {
+        return fuelAmount;
+    }
+
+    public void setFuelAmount(double fuelAmount) {
+        this.fuelAmount = fuelAmount;
+    }
+
+    public double getFuelCost() {
+        return fuelCost;
+    }
+
+    public void setFuelCost(double fuelCost) {
+        this.fuelCost = fuelCost;
+    }
+
+    public double getDistancedTravelled() {
+        return distancedTravelled;
+    }
+
+    public void setDistancedTravelled(double distancedTravelled) {
+        this.distancedTravelled = distancedTravelled;
+    }
+
+    public void drive(double distanced) {
+        double totalDistanced = distanced * this.fuelCost;
+        if (totalDistanced <= this.fuelAmount) {
+            this.fuelAmount -= totalDistanced;
+            this.distancedTravelled += distanced;
+        } else {
+            System.out.println("Insufficient fuel for the drive");
         }
-        return false;
     }
 
-    @Override
     public String toString() {
-        return String.format("%s %.2f %d", this.name, this.fuelAmount, this.distance);
-
+        return String.format("%s %.2f %.0f", this.getModel(), getFuelAmount(), getDistancedTravelled());
     }
 }
