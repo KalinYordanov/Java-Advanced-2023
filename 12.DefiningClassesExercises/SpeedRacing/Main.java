@@ -1,42 +1,39 @@
-package DefiningClassesExercises.SpeedRacing;
+package SpeedRacing;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int contCars = Integer.parseInt(scanner.nextLine());
-        Map<String, Car> cars = new LinkedHashMap<>();
-        for (int i = 0; i < contCars; i++) {
-            String[] data = scanner.nextLine().split("\\s+");
-            String model = data[0];
-            double fuelAmount = Integer.parseInt(data[1]);
-            double priceFuelPerKM = Double.parseDouble(data[2]);
+        int n = Integer.parseInt(reader.readLine());
 
-            Car car = new Car(model, fuelAmount, priceFuelPerKM);
+        LinkedHashMap<String, Car> cars = new LinkedHashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            String[] token = reader.readLine().split(" ");
+            String model = token[0];
+            double fuelAmount = Double.parseDouble(token[1]);
+            double fuelCoast = Double.parseDouble(token[2]);
+            Car car = new Car(model, fuelAmount, fuelCoast);
             cars.put(model, car);
-
-
         }
-        String command = scanner.nextLine();
 
-        while (!command.equals("End")) {
-            String carModelToDrive = command.split("\\s+")[1];
-            int kmToDrive = Integer.parseInt(command.split("\\s+")[2]);
+        String line = reader.readLine();
 
-            Car carToDrive = cars.get(carModelToDrive);
+        while (!line.equals("End")) {
+            String[] token = line.split(" ");
+            String model = token[1];
+            double distance = Double.parseDouble(token[2]);
+            Car car = cars.get(model);
+            car.drive(distance);
 
-            if (!carToDrive.drive(kmToDrive)) {
-                System.out.printf("Insufficient fuel for the drive%n");
-            }
-
-            command = scanner.nextLine();
+            line = reader.readLine();
         }
-        for (Car car : cars.values()) {
-            System.out.println(car.toString());
-        }
+        cars.values().forEach(System.out::println);
     }
 }
